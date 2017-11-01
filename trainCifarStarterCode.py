@@ -1,9 +1,10 @@
 from scipy import misc
 import numpy as np
 import tensorflow as tf
-import random
-import matplotlib.pyplot as plt
-import matplotlib as mp
+
+# import random
+# import matplotlib.pyplot as plt
+# import matplotlib as mp
 
 def weight_variable(shape):
     '''
