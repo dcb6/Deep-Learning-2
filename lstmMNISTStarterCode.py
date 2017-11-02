@@ -15,7 +15,7 @@ displayStep = 10
 
 nInput = 28 # 28 pixels in each row
 nSteps = 28 # 28 rows of pixels
-nHidden = 20 #number of neurons for the RNN
+nHidden = 10 #number of neurons for the RNN
 nClasses = 10 # 10 image classes in MNIST
 
 x = tf.placeholder('float', [None, nSteps, nInput])
@@ -34,7 +34,7 @@ def RNN(x, weights, biases):
 	x = tf.reshape(x, [-1, nInput])
 	x = tf.split(x, nSteps, 0) # configuring so you can get it as needed for the 28 pixels
 
-	lstmCell = tf.contrib.rnn.BasicLSTMCell(nHidden) # parameter is the number of units in the LSTM cell
+	lstmCell = tf.contrib.rnn.GRUCell(nHidden) # parameter is the number of units in the LSTM cell
 
 	outputs, states = tf.contrib.rnn.static_rnn(lstmCell, x, dtype=tf.float32) #for the rnn where to get the output and hidden state
 
