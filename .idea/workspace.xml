@@ -24,8 +24,8 @@
       <file leaf-file-name="trainCifarStarterCode.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/trainCifarStarterCode.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="980">
-              <caret line="168" column="8" lean-forward="false" selection-start-line="168" selection-start-column="8" selection-end-line="168" selection-end-column="8" />
+            <state relative-caret-position="261">
+              <caret line="211" column="43" lean-forward="false" selection-start-line="211" selection-start-column="43" selection-end-line="211" selection-end-column="43" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -515,8 +515,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/trainCifarStarterCode.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="980">
-          <caret line="168" column="8" lean-forward="false" selection-start-line="168" selection-start-column="8" selection-end-line="168" selection-end-column="8" />
+        <state relative-caret-position="261">
+          <caret line="211" column="43" lean-forward="false" selection-start-line="211" selection-start-column="43" selection-end-line="211" selection-end-column="43" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
           </folding>

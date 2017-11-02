@@ -166,7 +166,7 @@ def main():
 
     for i in range(len(summary_items)):
         variable_summaries(summary_items[i],summary_titles[i])
-        
+
     # --------------------------------------------------
     # setup training
     cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=tf_labels, logits=y_conv))
@@ -204,7 +204,7 @@ def main():
     feed_dict_train = {tf_data: Train, tf_labels: LTrain, keep_prob: 0.5}
     feed_dict_test = {tf_data: Test, tf_labels: LTest, keep_prob: 0.5}
 
-    for i in range(1): # try a small iteration size once it works then continue
+    for i in range(10000): # try a small iteration size once it works then continue
         perm = np.arange(nsamples)
         np.random.shuffle(perm)
         for j in range(batchsize):
@@ -212,7 +212,7 @@ def main():
             batch_ys[j,:] = LTrain[perm[j],:]
 
         # Batch accuracy
-        if i%100 == 0:
+        if i%10 == 0:
             # output the training accuracy every 100 iterations (batch)
             train_accuracy = accuracy.eval(feed_dict={tf_data: batch_xs, tf_labels: batch_ys, keep_prob:0.5})
             print("step %d, training accuracy %g" % (i, train_accuracy))
