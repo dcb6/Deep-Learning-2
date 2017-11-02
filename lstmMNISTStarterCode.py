@@ -8,14 +8,14 @@ print('Importing MNIST Data...')
 mnist = input_data.read_data_sets('MNIST_data', one_hot=True) # call mnist function
 print('Data imported')
 
-learningRate = .5
-trainingIters = 5000
-batchSize = 100
-displayStep = 100
+learningRate = 1e-4
+trainingIters = 250000
+batchSize = 150
+displayStep = 10
 
 nInput = 28 # 28 pixels in each row
 nSteps = 28 # 28 rows of pixels
-nHidden = 10 #number of neurons for the RNN
+nHidden = 100 #number of neurons for the RNN
 nClasses = 10 # 10 image classes in MNIST
 
 x = tf.placeholder('float', [None, nSteps, nInput])
@@ -45,13 +45,13 @@ pred = RNN(x, weights, biases)
 #optimization
 #create the cost, optimization, evaluation, and accuracy
 #for the cost softmax_cross_entropy_with_logits seems really good
-cost = tf.nn.softmax_cross_entropy_with_logits(labels=y, logits=pred)
-optimizer = tf.train.AdamOptimizer(1e-4,0.01).minimize(cost)
+cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y, logits=pred))
+optimizer = tf.train.AdamOptimizer(learningRate,0.01).minimize(cost)
 
 correctPred = tf.equal(tf.argmax(pred, 1), tf.argmax(y, 1))
 accuracy = tf.reduce_mean(tf.cast(correctPred, tf.float32))
 
-loss_summary = tf.summary.scalar('Test Validation', cost)
+loss_summary = tf.summary.scalar('Loss', cost)
 test_summary = tf.summary.scalar('Test Validation', accuracy)
 validation_summary = tf.summary.scalar('Cross Validation', accuracy)
 
@@ -63,10 +63,11 @@ other_writer = tf.summary.FileWriter(result_dir2)
 
 init = tf.initialize_all_variables()
 
+step = 1
+
 with tf.Session() as sess:
 	sess.run(init)
 	print('Session initialized')
-	step = 1
 
 	trainData = mnist.train.images.reshape((-1, nSteps, nInput))
 	trainLabel = mnist.train.labels
@@ -85,13 +86,12 @@ with tf.Session() as sess:
 		sess.run(optimizer, feed_dict={x:batchX, y:batchY}) # do I need keep_prob here?
 
 		# Batch accuracy and loss
-		if step % displayStep == 10:
+		if step % displayStep == 0:
 			acc = accuracy.eval(feed_dict=batch_dict)
 			loss = cost.eval(feed_dict=batch_dict)
 			print("Iter " + str(step*batchSize) + ", Minibatch Loss= " + str(loss)+ ", Training Accuracy= " + str(acc))
-		step +=1
 
-		if step % 1000 == 0:
+		if step % 100 == 0:
 			# To log training accuracy.
 			train_acc, train_summ = sess.run([accuracy, test_summary], feed_dict=feed_dict_train)
 			other_writer.add_summary(train_summ, step)
@@ -99,12 +99,14 @@ with tf.Session() as sess:
 			# To log validation accuracy.
 			valid_acc, valid_summ = sess.run([accuracy, validation_summary], feed_dict=feed_dict_test)
 			other_writer.add_summary(valid_summ, step)
-			other_writer.flush()
 
 			# To log loss
-			loss, loss_summ = sess.run([loss, loss_summary], feed_dict=batch_dict)
+			loss, loss_summ = sess.run([cost, loss_summary], feed_dict=batch_dict)
 			other_writer.add_summary(loss_summ, step)
 			other_writer.flush()
+			print('training and validation accuracy logged')
+
+		step += 1
 
 	print('Optimization finished')
 	print("Testing Accuracy:", sess.run(accuracy, feed_dict={x: testData, y: testLabel}))

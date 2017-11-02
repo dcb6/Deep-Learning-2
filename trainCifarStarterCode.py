@@ -152,7 +152,7 @@ def main():
     tf.summary.scalar('Cross Entropy', cross_entropy)
     #
     # # Build the summary operation based on the TF collection of Summaries.
-    image_summary_t = tf.summary.image('Conv1 Weights Image', tf.transpose(W_conv1,[3,1,0,2]),32)
+    tf.summary.image('Conv1 Weights Image', tf.transpose(W_conv1,[3,1,0,2]),32)
     summary_op = tf.summary.merge_all()
     test_summary = tf.summary.scalar('Test Validation', accuracy)
     validation_summary = tf.summary.scalar('Cross Validation', accuracy)
