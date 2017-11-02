@@ -15,7 +15,7 @@ displayStep = 10
 
 nInput = 28 # 28 pixels in each row
 nSteps = 28 # 28 rows of pixels
-nHidden = 40 #number of neurons for the RNN
+nHidden = 20 #number of neurons for the RNN
 nClasses = 10 # 10 image classes in MNIST
 
 x = tf.placeholder('float', [None, nSteps, nInput])
