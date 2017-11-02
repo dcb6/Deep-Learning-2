@@ -9,13 +9,13 @@ mnist = input_data.read_data_sets('MNIST_data', one_hot=True) # call mnist funct
 print('Data imported')
 
 learningRate = 1e-4
-trainingIters = 250000
+trainingIters = 1000000
 batchSize = 150
 displayStep = 10
 
 nInput = 28 # 28 pixels in each row
 nSteps = 28 # 28 rows of pixels
-nHidden = 100 #number of neurons for the RNN
+nHidden = 125 #number of neurons for the RNN
 nClasses = 10 # 10 image classes in MNIST
 
 x = tf.placeholder('float', [None, nSteps, nInput])
