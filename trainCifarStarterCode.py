@@ -89,7 +89,7 @@ ntest = 100  # per class
 nclass = 10  # number of classes
 imsize = 28
 nchannels = 1
-batchsize = 40
+batchsize = 200
 
 Train = np.zeros((ntrain * nclass, imsize, imsize, nchannels))
 Test = np.zeros((ntest * nclass, imsize, imsize, nchannels))
@@ -207,7 +207,7 @@ nsamples = ntrain * nclass
 feed_dict_train = {tf_data: Train, tf_labels: LTrain, keep_prob: 0.5}
 feed_dict_test = {tf_data: Test, tf_labels: LTest, keep_prob: 0.5}
 
-for i in range(10000): # try a small iteration size once it works then continue
+for i in range(50000): # try a small iteration size once it works then continue
     perm = np.arange(nsamples)
     np.random.shuffle(perm)
     for j in range(batchsize):
@@ -215,7 +215,7 @@ for i in range(10000): # try a small iteration size once it works then continue
         batch_ys[j,:] = LTrain[perm[j],:]
 
     # Batch accuracy
-    if i%10 == 0:
+    if i%100 == 0:
         # output the training accuracy every 100 iterations (batch)
         train_accuracy = accuracy.eval(feed_dict={tf_data: batch_xs, tf_labels: batch_ys, keep_prob:0.5})
         print("step %d, training accuracy %g" % (i, train_accuracy))
