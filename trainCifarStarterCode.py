@@ -5,6 +5,8 @@ import tensorflow as tf
 # import random
 # import matplotlib.pyplot as plt
 # import matplotlib as mp
+sess = tf.InteractiveSession()
+
 
 def variable_summaries(var,name):
   """Attach a lot of summaries to a Tensor (for TensorBoard visualization)."""
@@ -87,7 +89,7 @@ ntest = 100  # per class
 nclass = 10  # number of classes
 imsize = 28
 nchannels = 1
-batchsize = 500
+batchsize = 40
 
 Train = np.zeros((ntrain * nclass, imsize, imsize, nchannels))
 Test = np.zeros((ntest * nclass, imsize, imsize, nchannels))
@@ -114,8 +116,6 @@ for iclass in range(0, nclass):
         LTest[itest, iclass] = 1  # 1-hot label
 
 print("Images loaded.")
-
-sess = tf.InteractiveSession()
 
 # placeholders for input data and input labels
 tf_data = tf.placeholder(tf.float32,shape=[None,imsize,imsize,nchannels]) #tf variable for the data, remember shape is [None, width, height, numberOfChannels]
@@ -169,7 +169,7 @@ for i in range(len(summary_items)):
 # --------------------------------------------------
 # setup training
 cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=tf_labels, logits=y_conv))
-optimizer = tf.train.MomentumOptimizer(1e-4, 0.01).minimize(cross_entropy)
+optimizer = tf.train.AdamOptimizer(1e-5, 0.01).minimize(cross_entropy)
 correct_prediction = tf.equal(tf.argmax(y_conv, 1), tf.argmax(tf_labels, 1))
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
@@ -182,19 +182,23 @@ summary_op = tf.summary.merge_all()
 test_summary = tf.summary.scalar('Test Validation', accuracy)
 validation_summary = tf.summary.scalar('Cross Validation', accuracy)
 
+# Add the variable initializer Op.
+init = tf.initialize_all_variables()
+
 # Create a saver for writing training checkpoints.
 saver = tf.train.Saver()
 
 # Instantiate a SummaryWriter to output summaries and the Graph.
 result_dir1 = './results/graph' # directory where the results from the training are saved
 result_dir2 = './results/other'  # directory where the results from the training are saved
+
 summary_writer = tf.summary.FileWriter(result_dir1, sess.graph)
 other_writer = tf.summary.FileWriter(result_dir2)
 
 # --------------------------------------------------
 # optimization
 
-sess.run(tf.global_variables_initializer())
+sess.run(init)
 batch_xs = np.zeros([batchsize,imsize,imsize,nchannels]) #setup as [batchsize, width, height, numberOfChannels] and use np.zeros()
 batch_ys = np.zeros([batchsize,nclass]) #setup as [batchsize, the how many classes]
 
@@ -216,6 +220,10 @@ for i in range(10000): # try a small iteration size once it works then continue
         train_accuracy = accuracy.eval(feed_dict={tf_data: batch_xs, tf_labels: batch_ys, keep_prob:0.5})
         print("step %d, training accuracy %g" % (i, train_accuracy))
 
+        summary_str = sess.run(summary_op, feed_dict={tf_data: batch_xs, tf_labels: batch_ys, keep_prob:0.5})
+        summary_writer.add_summary(summary_str, i)
+        summary_writer.flush()
+
     # Test/Validation Accuracy
     if i%1000 == 0:
         # Log training accuracy.
@@ -231,4 +239,5 @@ for i in range(10000): # try a small iteration size once it works then continue
 
 summary = sess.run(summary_op,feed_dict={tf_data: batch_xs, tf_labels: batch_ys, keep_prob:0.5})
 other_writer.add_summary(summary)
+other_writer.flush()
 sess.close()
