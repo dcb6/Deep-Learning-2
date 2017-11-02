@@ -21,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="trainCifarStarterCode.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="trainCifarStarterCode.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/trainCifarStarterCode.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="453">
-              <caret line="201" column="51" lean-forward="false" selection-start-line="201" selection-start-column="51" selection-end-line="201" selection-end-column="51" />
+            <state relative-caret-position="980">
+              <caret line="168" column="8" lean-forward="false" selection-start-line="168" selection-start-column="8" selection-end-line="168" selection-end-column="8" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -33,7 +33,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="lstmMNISTStarterCode.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dcn_mnist.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../Assignment 1/Assignment 1 Repo/dcn_mnist.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="393">
+              <caret line="141" column="32" lean-forward="false" selection-start-line="141" selection-start-column="32" selection-end-line="141" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="lstmMNISTStarterCode.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lstmMNISTStarterCode.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
@@ -73,8 +83,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/../Assignment 1/Submission1/dcn_mnist.py" />
-        <option value="$PROJECT_DIR$/trainCifarStarterCode.py" />
         <option value="$PROJECT_DIR$/lstmMNISTStarterCode.py" />
+        <option value="$PROJECT_DIR$/trainCifarStarterCode.py" />
       </list>
     </option>
   </component>
@@ -276,7 +286,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3675937" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3688029" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19588876" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -485,22 +495,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/trainCifarStarterCode.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="201" column="51" lean-forward="false" selection-start-line="201" selection-start-column="51" selection-end-line="201" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lstmMNISTStarterCode.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="17" column="12" lean-forward="false" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Assignment 1/Assignment 1 Repo/dcn_mnist.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="141" column="32" lean-forward="false" selection-start-line="141" selection-start-column="32" selection-end-line="141" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trainCifarStarterCode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="980">
+          <caret line="168" column="8" lean-forward="false" selection-start-line="168" selection-start-column="8" selection-end-line="168" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
           </folding>
         </state>
       </provider>

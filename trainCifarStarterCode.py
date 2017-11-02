@@ -6,6 +6,18 @@ import tensorflow as tf
 # import matplotlib.pyplot as plt
 # import matplotlib as mp
 
+def variable_summaries(var,name):
+  """Attach a lot of summaries to a Tensor (for TensorBoard visualization)."""
+  with tf.name_scope(name):
+    mean = tf.reduce_mean(var)
+    tf.summary.scalar('mean', mean)
+    with tf.name_scope('stddev'):
+      stddev = tf.sqrt(tf.reduce_mean(tf.square(var - mean)))
+    tf.summary.scalar('stddev', stddev)
+    tf.summary.scalar('max', tf.reduce_max(var))
+    tf.summary.scalar('min', tf.reduce_min(var))
+    tf.summary.histogram('histogram', var)
+
 def weight_variable(shape):
     '''
     Initialize weights
@@ -141,6 +153,20 @@ def main():
     b_fc2 = bias_variable([nclass])
     y_conv = tf.matmul(h_fc1_drop, W_fc2) + b_fc2
 
+    # create summaries
+    summary_items = [W_conv1,b_conv1,conv2d(x_image, W_conv1) + b_conv1,h_conv1,h_pool1,
+        W_conv2,b_conv2,conv2d(h_pool1, W_conv2) + b_conv2,h_conv2,h_pool2,
+        W_fc1,b_fc1,tf.matmul(h_pool2_flat, W_fc1) + b_fc1,h_fc1,
+        W_fc2,b_fc2,tf.matmul(h_fc1_drop, W_fc2) + b_fc2,y_conv]
+
+    summary_titles = ['Conv_1_Weights','Conv_1_Bias','Conv_1_Input','Conv_1_Activations_post-Tanh','Conv_1_Activations_post-Pooling',
+            'Conv_2_Weights','Conv_2_Bias','Conv_2_Input','Conv_2_Activations_post-Tanh','Conv_2_Activations_post-Pooling',
+            'Dense_1_Weights','Dense_1_Bias','Dense_1_Inputs','Dense_1_Activations',
+            'Softmax_Weights','Softmax_Bias','Softmax_Inputs','Softmax_Activations']
+
+    for i in range(len(summary_items)):
+        variable_summaries(summary_items[i],summary_titles[i])
+        
     # --------------------------------------------------
     # setup training
     cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=tf_labels, logits=y_conv))
